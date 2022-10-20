@@ -1,0 +1,19 @@
+table,
+td,
+tr {
+    border: 1px solid rgb(81, 81, 196);
+    border-collapse: collapse;
+
+}
+
+td {
+    padding: 0;
+}
+
+.pt {
+    transform: rotate(180deg);
+}
+
+table {
+    text-align: center;
+}
