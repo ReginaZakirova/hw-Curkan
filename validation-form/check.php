@@ -30,5 +30,5 @@ setcookie('user', $login, time() + 3600, "/");
 
 $mysql->close();
 
-header('Location: ../authorization.php');
+header('Location: ../index.php');
 ?>

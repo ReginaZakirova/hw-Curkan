@@ -1,4 +1,5 @@
 <?php
+session_start();
 $text = [
     "таблица" => "Таблица",
     "имя" => "Георгий Цуркан",
@@ -22,7 +23,8 @@ function count_word($string)
 {
     return count(explode(" ", $string));
 }
-function count_vowels($string){
+function count_vowels($string)
+{
     $vowels_num = 0;
     $vowels = mb_str_split("АОУЫЭЕЁИЮЯаоуыэеёиюя");
     $string = mb_str_split($string);
@@ -33,7 +35,8 @@ function count_vowels($string){
     }
     return $vowels_num;
 }
-function paint_words($string){
+function paint_words($string)
+{
     $b = explode(" ", $string);
     for ($i = 0; $i < count($b); $i++) {
         if ($i % 2 == 0) {
@@ -49,6 +52,13 @@ foreach ($text as $string) {
     $words_num += count_word($string);
     $vowels_num += count_vowels($string);
 }
+function set_color($color)
+{
+    $_SESSION["color"] = $color;
+}
+if (isset($_POST["color"])) {
+    set_color($_POST["color"]);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -59,16 +69,14 @@ foreach ($text as $string) {
     <title>Zagolovok</title>
 </head>
 
-<body>
-    <header class="header">
-        <img src="Images/Smile.png">
-        <a href="table.html"><?php echo $text["таблица"] ?></a>
-        <div><?php echo $text["гласные"] . $vowels_num ?></div>
-        <div><?php echo $text["слова"] . $words_num ?></div>
-        <div><?php echo $text["др"] ?></div>
-        <div><?php echo $text["сегодня"] . date('d.m.Y') ?></div>
-        <div><?php echo $text["разность"] . diff_date('10.07.1991')->format('%a дней') ?></div>
-    </header>
+<body style="background-color: <?php
+                                if (isset($_SESSION["color"])) {
+                                    echo $_SESSION["color"]; 
+                                }
+                                ?>;">
+    <?php
+    include "header.php";
+    ?>
     <main class="block">
         <aside class="photo"><img src="Images/Egorka.jpg"></aside>
         <div class="content">
